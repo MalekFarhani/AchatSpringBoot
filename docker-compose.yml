@@ -12,7 +12,7 @@ services:
       - 80:80
   dbb:
     image: mysql:5.7
-    container_name: mysql-db
+    container_name: mysql-dbb
     environment:
       MYSQL_DATABASE: achatdb
       MYSQL_ROOT_PASSWORD: root

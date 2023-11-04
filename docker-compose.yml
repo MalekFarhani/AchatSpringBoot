@@ -1,0 +1,21 @@
+version: "2"
+services: 
+  backend:
+    depends_on: [db]
+    image: malekkkk/achat:1.0
+    ports:
+      - "8089:8089"
+  front:
+    depends_on: [backend]
+    image: malekkkk/achatang:1.0  
+    ports:
+      - 80:80
+  db:
+    image: mysql:8.0
+    container_name: mysql-db
+    environment:
+      MYSQL_DATABASE: achatdb
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
+    ports:
+      - "3307:3306" #jw

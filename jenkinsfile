@@ -40,7 +40,7 @@ stage('SonarQube Analysis') {
                groupId: 'test',
                nexusUrl: '192.168.222.131:8081',
                nexusVersion: 'nexus3',
-               protocol: 'http',
+               protocol: 'http',55
                repository: 'test',
                version: '${BUILD_ID}'
           }}

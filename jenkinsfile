@@ -8,8 +8,7 @@ environment {
 stages{
     stage('pulling the code'){
         steps{
-            git branch: 'Reglement-malek',
-            credentialsId: 'git-cred',
+            git branch: 'main',
             url: 'https://github.com/MalekFarhani/AchatSpringBoot'
 }}
     stage('build'){

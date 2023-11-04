@@ -1,16 +1,16 @@
 version: "2"
 services: 
-  backend:
-    depends_on: [db]
+  backendd:
+    depends_on: [dbb]
     image: malekkkk/achat:2.2
     ports:
       - "8089:8089"
-  front:
-    depends_on: [backend]
+  frontt:
+    depends_on: [backendd]
     image: malekkkk/achatang:1.0  
     ports:
       - 80:80
-  db:
+  dbb:
     image: mysql:5.7
     container_name: mysql-db
     environment:

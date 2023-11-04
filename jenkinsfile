@@ -47,7 +47,7 @@ stages{
 */
  stage('docker'){
         steps{ 
-                sh 'docker build . -t malekkkk/achat:2.0'   
+                sh 'docker build . -t malekkkk/achat:2.2'   
     
         }}
  stage('docker login'){
@@ -58,7 +58,7 @@ stages{
    
 stage ('docker push'){
         steps{
-            sh 'docker push malekkkk/achat:2.0'
+            sh 'docker push malekkkk/achat:2.2'
         }
     }
 stage('docker compose '){

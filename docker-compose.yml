@@ -2,7 +2,7 @@ version: "2"
 services: 
   backend:
     depends_on: [db]
-    image: malekkkk/achat:2.0
+    image: malekkkk/achat:2.2
     ports:
       - "8089:8089"
   front:

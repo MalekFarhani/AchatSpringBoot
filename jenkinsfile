@@ -10,7 +10,7 @@ stages{
         steps{
             git branch: 'Reglement-malek',
             credentialsId: 'git-cred',
-            url: 'https://github.com/JihedMelki7/Groupe3_Achat.git'
+            url: 'https://github.com/MalekFarhani/AchatSpringBoot'
 }}
     stage('build'){
         steps{ 
@@ -47,7 +47,7 @@ stage('SonarQube Analysis') {
 */
  stage('docker'){
         steps{ 
-                sh 'docker build . -t malekkkk/achat:1.0'   
+                sh 'docker build . -t malekkkk/achat:2.0'   
     
         }}
  stage('docker login'){
@@ -58,7 +58,7 @@ stage('SonarQube Analysis') {
    
 stage ('docker push'){
         steps{
-            sh 'docker push malekkkk/achat:1.0'
+            sh 'docker push malekkkk/achat:2.0'
         }
     }
 stage('docker compose '){

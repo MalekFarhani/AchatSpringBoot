@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: achatback
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: achatback
+  template:
+    metadata:
+      labels:
+        app: achatback
+    spec:
+      containers:
+        - name: achtback
+          image: malekkkk/achat:2.2
+          ports:
+            - containerPort: 8089
+          env:
+            - name: DB_HOST
+              value: mysql-service # Replace with your MySQL service name
+            - name: DB_PORT
+              value: "3306"
+            - name: DB_USER
+              value: root
+            - name: DB_PASSWORD
+              value: ""

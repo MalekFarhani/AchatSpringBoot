@@ -51,7 +51,7 @@ stage('SonarQube Analysis') {
 */
  stage('docker'){
         steps{ 
-                sh 'docker build . -t malekkkk/achat:2.2'   
+                sh 'docker build . -t malekkkk/achat:3.2'   
     
         }}
  stage('docker login'){
@@ -62,7 +62,7 @@ stage('SonarQube Analysis') {
    
 stage ('docker push'){
         steps{
-            sh 'docker push malekkkk/achat:2.2'
+            sh 'docker push malekkkk/achat:3.2'
         }
     }
 

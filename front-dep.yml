@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: achatfront
-          image: malekkkk/achatang:1.0
+          image: malekkkk/achatang:1.2
           ports:
             - containerPort: 80

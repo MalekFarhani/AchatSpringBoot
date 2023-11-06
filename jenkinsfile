@@ -23,12 +23,12 @@ stages{
         steps{ 
             sh 'mvn test'
 }} 
-stage('SonarQube Analysis') {
+/*stage('SonarQube Analysis') {
             steps {
               // echo 'sonarqube'
                 sh 'mvn sonar:sonar -Dsonar.login=ffdf83093412b00e3ee51f3f8f52c33886353bef'
             }
-        }
+        } */
 
    stage('dep nexus'){
         steps{ 

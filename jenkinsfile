@@ -2,22 +2,20 @@ pipeline{
     
     agent any
 
-/*environment {
-  DOCKER_TAG = getVersion()
-}*/
+
 stages{
-   /*     stage('clean workspace')
+       stage('clean workspace')
         {
             steps{
                 cleanWs()
                  }
-        } */
+        } 
     stage('pulling the code'){
         steps{
             git branch: 'main',
             url: 'https://github.com/MalekFarhani/AchatSpringBoot'
-}}}}
-/*    stage('build'){
+}}
+    stage('build'){
         steps{ 
             sh 'mvn clean package'
 }}
@@ -50,7 +48,7 @@ stage('SonarQube Analysis') {
                repository: 'test',
                version: '${BUILD_ID}'
           }}
-
+*/
  stage('docker'){
         steps{ 
                 sh 'docker build . -t malekkkk/achat:2.2'   
@@ -67,17 +65,5 @@ stage ('docker push'){
             sh 'docker push malekkkk/achat:2.2'
         }
     }
-stage('docker compose '){
-       steps{
-            sh 'docker compose up -d '
-      }
-    } 
 
-
-}
-}
-/*def getVersion()
-{
-   def commitHash = sh returnStdout: true, script: 'git rev-parse --short  HEAD'
-   return commitHash 
-}*/
+}}

@@ -34,24 +34,10 @@ stages{
         steps{ 
             sh 'mvn deploy -DskipTests'
 }} 
-/*stage('Publish to Nexus') {
-            steps {
-               nexusArtifactUploader artifacts: [[artifactId: 'malek',
-               classifier: '',
-               file: './target/JavaTest-0.0.1-SNAPSHOT.war',
-               type: '']],
-               credentialsId: 'nex-cred',
-               groupId: 'test',
-               nexusUrl: '192.168.222.131:8081',
-               nexusVersion: 'nexus3',
-               protocol: 'http',55
-               repository: 'test',
-               version: '${BUILD_ID}'
-          }}
-*/
+
  stage('docker'){
         steps{ 
-                sh 'docker build . -t malekkkk/achat:3.2'   
+                sh 'docker build . -t malekkkk/achat:1.0'   
     
         }}
  stage('docker login'){
@@ -62,7 +48,7 @@ stages{
    
 stage ('docker push'){
         steps{
-            sh 'docker push malekkkk/achat:3.2'
+            sh 'docker push malekkkk/achat:1.0'
         }
     }
 

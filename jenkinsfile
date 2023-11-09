@@ -15,20 +15,32 @@ stages{
             git branch: 'main',
             url: 'https://github.com/MalekFarhani/AchatSpringBoot'
 }}
-    stage('build'){
+stage('OWASP FS SCAN') {
+            steps {
+                dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'DP-Check'
+                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+            }
+        }
+ 
+stage('TRIVY FS SCAN') {
+            steps{
+                sh "trivy fs . > trivyfs.txt"
+                 }
+        } 
+stage('build'){
         steps{ 
             sh 'mvn clean package'
 }}
- stage('test'){
+stage('test'){
         steps{ 
             sh 'mvn test'
 }} 
-/*stage('SonarQube Analysis') {
+stage('SonarQube Analysis') {
             steps {
               // echo 'sonarqube'
                 sh 'mvn sonar:sonar -Dsonar.login=ffdf83093412b00e3ee51f3f8f52c33886353bef'
             }
-        } */
+        } 
 
    stage('dep nexus'){
         steps{ 
@@ -37,7 +49,7 @@ stages{
 
  stage('docker'){
         steps{ 
-                sh 'docker build . -t malekkkk/achat:1.0'   
+                sh 'docker build . -t malekkkk/achatbdev:1.0'   
     
         }}
  stage('docker login'){
@@ -48,8 +60,35 @@ stages{
    
 stage ('docker push'){
         steps{
-            sh 'docker push malekkkk/achat:1.0'
+            sh 'docker push malekkkk/achatbdev:1.0'
         }
     }
-
+ stage("TRIVY IMAGE Scan"){
+            steps{
+                sh "trivy image malekkkk/achatbdev:1.0 > trivyimage.txt" 
+                 }
+        } 
+ stage ('clean local repo') {
+        steps{
+            sh 'docker builder prune -y'
+        }
+    }
+stage ('Deployment dev'){
+    steps{
+        sh 'dcoker compose up -d'
+    }
+}
 }}
+post {
+     always {
+        script {
+      //  def owaspFsScanReportPath = "**/dependency-check-report.xml"
+        emailext attachLog: true,
+            subject: "'${currentBuild.result}'",
+            body: "Project: ${env.JOB_NAME}<br/>" +
+                "Build Number: ${env.BUILD_NUMBER}<br/>" +
+                "URL: ${env.BUILD_URL}<br/>",
+            to: 'devopsteam1009@gmail.com',
+            attachmentsPattern: 'trivyfs.txt,trivyimage.txt' //${owaspFsScanReportPath}
+        }}
+    }

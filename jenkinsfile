@@ -73,7 +73,7 @@ stage ('Deployment dev'){
         sh 'docker compose up -d'
     }
 }
-}}
+}
 post {
      always {
         emailext attachLog: true,
@@ -84,3 +84,4 @@ post {
             to: 'devopsteam1009@gmail.com',
             attachmentsPattern: 'trivyfs.txt,trivyimage.txt'
         }}
+}

@@ -70,7 +70,7 @@ stage ('docker push'){
         } 
 stage ('Deployment dev'){
     steps{
-        sh 'dcoker compose up -d'
+        sh 'docker compose up -d'
     }
 }
 }}

@@ -68,11 +68,6 @@ stage ('docker push'){
                 sh "trivy image malekkkk/achatbdev:1.0 > trivyimage.txt" 
                  }
         } 
- stage ('clean local repo') {
-        steps{
-            sh 'docker builder prune -y'
-        }
-    }
 stage ('Deployment dev'){
     steps{
         sh 'dcoker compose up -d'

@@ -1,12 +1,12 @@
 version: "2"
 services: 
   backendd:
-    depends_on: [dbb]
+    depends_on: [frontt]
     image: malekkkk/achatbdev:1.0
     ports:
       - "8089:8089"
   frontt:
-    depends_on: [backendd]
+    depends_on: [dbb]
     image: malekkkk/achatfdev:1.0  
     ports:
       - 80:80

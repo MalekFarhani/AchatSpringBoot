@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: achtback
-          image: malekkkk/achat:3.2
+          image: malekkkk/achatsp:2.0
           ports:
             - containerPort: 8089

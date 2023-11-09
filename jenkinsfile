@@ -12,7 +12,7 @@ stages{
         } 
     stage('pulling the code'){
         steps{
-            git branch: 'main',
+            git branch: 'dev',
             url: 'https://github.com/MalekFarhani/AchatSpringBoot'
 }}
 stage('OWASP FS SCAN') {

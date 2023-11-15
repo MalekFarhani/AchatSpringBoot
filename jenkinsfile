@@ -10,7 +10,7 @@ stages{
                 cleanWs()
                  }
         } 
-    stage('pulling the code'){
+    stage('pulling the code from GITHUB'){
         steps{
             git branch: 'dev',
             url: 'https://github.com/MalekFarhani/AchatSpringBoot'
@@ -27,11 +27,11 @@ stage('TRIVY FS SCAN') {
                 sh "trivy fs . > trivyfs.txt"
                  }
         } 
-stage('build'){
+stage('Packaging'){
         steps{ 
             sh 'mvn clean package'
 }}
-stage('test'){
+stage('Testing with Mockito'){
         steps{ 
             sh 'mvn test'
 }} 
@@ -42,23 +42,23 @@ stage('SonarQube Analysis') {
             }
         } 
 
-   stage('dep nexus'){
+   stage('Deploying To Nexus'){
         steps{ 
             sh 'mvn deploy -DskipTests'
 }} 
 
- stage('docker'){
+ stage('Building Docker Image'){
         steps{ 
                 sh 'docker build . -t malekkkk/achatbdev:1.0'   
     
         }}
- stage('docker login'){
+ stage('DockerHub login'){
         steps {
                 withCredentials([string(credentialsId: 'dockerh', variable: 'dockerhubpwd')]) {      
                         sh "echo \$dockerhubpwd | docker login -u malekkkk --password-stdin"
             }}}
    
-stage ('docker push'){
+stage ('Pushing The Image'){
         steps{
             sh 'docker push malekkkk/achatbdev:1.0'
         }
@@ -68,7 +68,7 @@ stage ('docker push'){
                 sh "trivy image malekkkk/achatbdev:1.0 > trivyimage.txt" 
                  }
         } 
-stage ('Deployment dev'){
+stage ('Dev Deployment'){
     steps{
         sh 'docker compose up -d'
     }
@@ -87,4 +87,5 @@ post {
             attachmentsPattern: 'trivyfs.txt,trivyimage.txt' //${owaspFsScanReportPath}
         }}
     }
+     name 'Sending logs & Security Feedback'
 }
